@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
             return null;
         }
 
-        $imagePath = storage_path('app/seed_images/' . $fileName);
+        $imagePath = storage_path('app/public/products/' . $fileName);
 
         if (!file_exists($imagePath)) {
             echo "  File not found: {$fileName}. Skipping.\n";
