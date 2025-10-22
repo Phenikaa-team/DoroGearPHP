@@ -15,20 +15,22 @@
             <!-- Product Images -->
             <div class="col-md-5">
                 <div class="product-detail-image bg-white p-4 rounded shadow-sm mb-3">
-                    <img src="{{ $product->image_url ?? 'https://via.placeholder.com/500' }}"
+                    <img src="{{ $product->main_image ?? 'https://via.placeholder.com/500' }}"
                          class="img-fluid"
                          alt="{{ $product->name }}"
                          id="mainImage">
                 </div>
 
-                @if($product->images && $product->images->count() > 0)
+                @if($product->other_images && count($product->other_images) > 0)
                     <div class="product-thumbnails d-flex gap-2">
-                        <img src="{{ $product->image_url }}"
+
+                        <img src="{{ $product->main_image }}"
                              class="img-thumbnail cursor-pointer active"
                              style="width: 80px; height: 80px; object-fit: contain;"
                              onclick="changeImage(this.src)">
-                        @foreach($product->images as $image)
-                            <img src="{{ $image->image_url }}"
+
+                        @foreach($product->other_images as $image_url)
+                            <img src="{{ $image_url }}"
                                  class="img-thumbnail cursor-pointer"
                                  style="width: 80px; height: 80px; object-fit: contain;"
                                  onclick="changeImage(this.src)">

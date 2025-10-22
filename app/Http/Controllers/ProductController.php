@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -62,5 +61,27 @@ class ProductController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Product added!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (!$query) {
+            return redirect(route('home'));
+        }
+
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->paginate(12)
+            ->appends(['query' => $query]);
+
+        foreach ($products as $product) {
+            $product->old_price = $product->discount_percent > 0
+                ? $product->price / (1 - $product->discount_percent / 100)
+                : null;
+        }
+
+        return view('products.search', compact('products', 'query'));
     }
 }

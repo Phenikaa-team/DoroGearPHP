@@ -14,8 +14,15 @@
 ---
 
 - **Thành viên:** Trần Bá Minh Đức  
-- **Mã sinh viên:** 23010210  
+- **Mã sinh viên:** 23010210
 
+```bash
+  npm run dev
+```
+
+```bash
+  php artisan serve
+```
 
 
 

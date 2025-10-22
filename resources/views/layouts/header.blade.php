@@ -12,12 +12,16 @@
             </div>
             <div class="col-md-5">
                 <div class="search-box">
-                    <form class="d-flex">
+                    <form class="d-flex" action="{{ route('search') }}" method="GET">
                         <div class="input-group">
                             <span class="input-group-text border-end-0">
                                 <i class="fas fa-search fa-lg"></i>
                             </span>
-                            <input type="text" class="form-control border-start-0 ps-0" placeholder="Tìm kiếm sản phẩm...">
+                            <input type="text" class="form-control border-start-0 ps-0"
+                                   name="query"
+                                   placeholder="Tìm kiếm sản phẩm..."
+                                   value="{{ request('query') }}"
+                                   required>
                         </div>
                     </form>
                 </div>
@@ -56,7 +60,16 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
+
+                                @if (Auth::user()->isAdmin())
+                                    <li>
+                                        <a class="dropdown-item fw-bold text-danger" href="{{ route('admin.dashboard') }}">
+                                            <i class="fas fa-shield-halved me-2"></i> Admin Panel
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}">Tài khoản của tôi</a></li>
                                 <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
@@ -65,6 +78,7 @@
                                         <button type="submit" class="dropdown-item text-danger">Đăng xuất</button>
                                     </form>
                                 </li>
+
                             </ul>
                         </div>
                     @endauth

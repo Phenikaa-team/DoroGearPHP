@@ -121,8 +121,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.7,
                 'sold_count' => 290,
                 'stock' => 38,
-                'main_image' => 'asus-b660m_main.jpg',
-                'other_images' => ['asus-b660m_1.jpg', 'asus-b660m_2.jpg'],
+                'main_image' => 'ryzen5-5600x_main.jpg',
+                'other_images' => ['ryzen5-5600x_1.jpg', 'ryzen5-5600x_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'AM4',
@@ -146,8 +146,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.8,
                 'sold_count' => 220,
                 'stock' => 32,
-                'main_image' => '',
-                'other_images' => [''],
+                'main_image' => 'asus-b660m_main.jpg',
+                'other_images' => ['asus-b660m_1.jpg', 'asus-b660m_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'LGA1700',
