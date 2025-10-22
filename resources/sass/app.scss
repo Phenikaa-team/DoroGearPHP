@@ -1,0 +1,184 @@
+@import '~bootstrap/scss/bootstrap';
+
+// Variables
+$primary-color: #008e68;
+$secondary-color: #00c490;
+$success-color: #32ffa0;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #0dcaf0;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.main-header {
+    background: linear-gradient(135deg, $secondary-color 0%, $primary-color 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .logo-icon {
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .search-box .input-group {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #00c490;
+
+        .form-control, .input-group-text {
+            background-color: transparent !important;
+            border: none !important;
+            color: white !important;
+        }
+
+        .form-control {
+            padding-left: 0.3rem !important;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+        }
+    }
+
+    .header-link {
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+
+            i {
+                color: #ffd700 !important;
+            }
+        }
+
+        small {
+            font-size: 0.75rem;
+        }
+    }
+
+    .btn-outline-light {
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: white;
+            color: $primary-color;
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.nav-secondary {
+    background: $secondary-color;
+
+    a {
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #ffd700 !important;
+        }
+    }
+}
+
+footer {
+    margin-top: 50px;
+
+    h5 {
+        color: $primary-color;
+        font-weight: 600;
+    }
+
+    a {
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $primary-color !important;
+            text-decoration: underline;
+        }
+    }
+}
+
+.card {
+    border-radius: 10px;
+
+    &.product-card {
+        .card-body {
+            padding: 1rem;
+        }
+    }
+}
+
+.category-card {
+    cursor: pointer;
+    border-radius: 15px;
+
+    &:hover {
+        .card-body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+    }
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.badge {
+    padding: 0.35em 0.65em;
+    font-weight: 600;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        .header-link {
+            small {
+                font-size: 0.65rem;
+            }
+        }
+    }
+
+    .side-banner {
+        display: none !important;
+    }
+}
