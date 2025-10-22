@@ -16,13 +16,9 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $cpuCategory = Category::where('name', 'CPU')->first();
-        $cpuProducts = Product::where('category_id', $cpuCategory->category_id)
-            ->orderBy('sold_count', 'desc')
-            ->take(8)
+        $categories = Category::has('products')
+            ->with('products')
             ->get();
-
-        $categories = Category::all();
 
         foreach ($hotProducts as $product) {
             $product->old_price = $product->discount_percent > 0
@@ -30,12 +26,14 @@ class HomeController extends Controller
                 : null;
         }
 
-        foreach ($cpuProducts as $product) {
-            $product->old_price = $product->discount_percent > 0
-                ? $product->price / (1 - $product->discount_percent / 100)
-                : null;
+        foreach ($categories as $category) {
+            foreach ($category->products as $product) {
+                $product->old_price = $product->discount_percent > 0
+                    ? $product->price / (1 - $product->discount_percent / 100)
+                    : null;
+            }
         }
 
-        return view('welcome', compact('hotProducts', 'cpuProducts', 'categories'));
+        return view('welcome', compact('hotProducts', 'categories'));
     }
 }
