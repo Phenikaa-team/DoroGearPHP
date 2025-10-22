@@ -8,10 +8,11 @@ class Product extends Model {
     protected $primaryKey = 'product_id';
     protected $fillable = [
         'name','description','category_id','price','discount_percent','rating',
-        'sold_count','stock','image_url','warranty','spec'
+        'sold_count','stock','main_image', 'other_images','warranty','spec'
     ];
     protected $casts = [
         'spec' => 'array',
+        'other_images' => 'array',
         'price' => 'decimal:2',
         'discount_percent' => 'decimal:2',
         'rating' => 'decimal:2',
@@ -20,9 +21,5 @@ class Product extends Model {
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
-    }
-    public function images(): HasMany
-    {
-        return $this->hasMany(ProductImage::class, 'product_id');
     }
 }

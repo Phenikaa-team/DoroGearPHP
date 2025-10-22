@@ -36,13 +36,38 @@
                         <i class="fas fa-shopping-cart fa-2x mb-2"></i>
                         <small>Giỏ hàng</small>
                     </a>
-                    <a href="#" class="btn btn-outline-light d-flex align-items-center">
-                        <i class="fas fa-user-circle fa-lg me-2"></i>
-                        <div class="text-start">
-                            <small class="d-block" style="font-size: 0.7rem;">Đăng nhập/ Đăng ký</small>
-                            <small class="fw-bold" style="font-size: 0.75rem;">Tài khoản ▼</small>
+                    @guest
+                        <a href="{{ route('login') }}" class="btn btn-outline-light d-flex align-items-center">
+                            <i class="fas fa-user-circle fa-lg me-2"></i>
+                            <div class="text-start">
+                                <small class="d-block" style="font-size: 0.7rem;">Đăng nhập/ Đăng ký</small>
+                                <small class="fw-bold" style="font-size: 0.75rem;">Tài khoản ▼</small>
+                            </div>
+                        </a>
+                    @endguest
+
+                    @auth
+                        <div class="dropdown">
+                            <a href="#" class="btn btn-outline-light d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle fa-lg me-2"></i>
+                                <div class="text-start">
+                                    <small class="d-block" style="font-size: 0.7rem;">Xin chào,</small>
+                                    <small class="fw-bold" style="font-size: 0.75rem;">{{ Str::limit(Auth::user()->full_name, 15) }}</small>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
+                                <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
-                    </a>
+                    @endauth
                 </div>
             </div>
         </div>

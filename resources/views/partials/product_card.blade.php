@@ -1,8 +1,9 @@
 <div class="card product-card h-100 border-0 shadow-sm position-relative">
-    @if($product->discount_percent > 0)
-        <div class="discount-badge position-absolute" style="top: 10px; right: 10px; z-index: 10;">
-            <span class="badge bg-danger">-{{ round($product->discount_percent) }}%</span>
-        </div>
+
+    @if ($product->discount_percent && $product->discount_percent > 0)
+        <span class="badge bg-danger discount-badge position-absolute rounded-pill" style="top: 10px; right: 10px; z-index: 10;">
+            -{{ number_format($product->discount_percent) }}%
+        </span>
     @endif
 
     @if($product->sold_count > 300 || $product->discount_percent > 10)
@@ -12,7 +13,7 @@
     @endif
 
     <div class="product-image-wrapper bg-light">
-        <img src="{{ $product->image_url ?? 'https://via.placeholder.com/300' }}"
+        <img src="{{ $product->main_image ?? 'https://via.placeholder.com/300' }}"
              class="card-img-top p-3"
              alt="{{ $product->name }}"
              loading="lazy">

@@ -4,7 +4,7 @@
     <div class="container-fluid px-0">
         <div class="row g-0">
             <div class="col-lg-2 d-none d-lg-block">
-                <div class="side-banner-left bg-gradient-primary text-white h-50 d-flex align-items-center justify-content-center rounded">
+                <div class="side-banner-left bg-gradient-primary text-white h-50 d-flex align-items-center justify-content-center rounded sticky-banner">
                     <h5 style="writing-mode: vertical-rl; text-orientation: mixed;" class="fw-bold">
                         KHUYẾN MÃI ĐẶC BIỆT
                     </h5>
@@ -95,8 +95,8 @@
                 @endif
             </div>
 
-            <div class="col-md-2 d-none d-md-block">
-                <div class="side-banner bg-gradient-success text-white h-50 d-flex align-items-center justify-content-center rounded">
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="side-banner bg-gradient-success text-white h-50 d-flex align-items-center justify-content-center rounded sticky-banner">
                     <h5 style="writing-mode: vertical-rl; text-orientation: mixed;" class="fw-bold">
                         DEAL KHỦNG HÔM NAY
                     </h5>
@@ -106,17 +106,24 @@
     </div>
 
     <style>
-        .side-banner {
-            min-height: 800px;
+        /*.side-banner {*/
+        /*    min-height: 800px;*/
+        /*}*/
+
+        .sticky-banner {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 20px;
         }
+
         .bg-gradient-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
         }
         .bg-gradient-info {
-            background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+            background: #36d1dc;
         }
         .bg-gradient-warning {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f5576c;
         }
         .bg-gradient-success {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);

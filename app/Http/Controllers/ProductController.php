@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['category', 'images'])->findOrFail($id);
+        $product = Product::with(['category'])->findOrFail($id);
 
         $product->old_price = $product->discount_percent > 0
             ? $product->price / (1 - $product->discount_percent / 100)
@@ -47,26 +47,20 @@ class ProductController extends Controller
         return view('products.show', compact('product', 'relatedProducts'));
     }
 
-    public function uploadImage(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $product = Product::findOrFail($id);
+        $path = $request->file('image')->store('products', 'public');
 
-        if ($request->hasFile('image')) {
-            if ($product->image_url && Storage::disk('public')->exists($product->image_url)) {
-                Storage::disk('public')->delete($product->image_url);
-            }
+        Product::create([
+            'name' => $request->name,
+            'image_path' => $path,
+        ]);
 
-            $imagePath = $request->file('image')->store('products', 'public');
-            $product->image_url = '/storage/' . $imagePath;
-            $product->save();
-
-            return redirect()->back()->with('success', 'Image uploaded successfully');
-        }
-
-        return redirect()->back()->with('error', 'Failed to upload image');
+        return redirect()->back()->with('success', 'Product added!');
     }
 }

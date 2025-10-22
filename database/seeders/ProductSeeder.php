@@ -4,12 +4,38 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductImage;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductSeeder extends Seeder
 {
+    private function uploadImage($fileName)
+    {
+        if (empty($fileName)) {
+            echo "  Empty filename detected. Skipping.\n";
+            return null;
+        }
+
+        $imagePath = storage_path('app/seed_images/' . $fileName);
+
+        if (!file_exists($imagePath)) {
+            echo "  File not found: {$fileName}. Skipping.\n";
+            return null;
+        }
+
+        $file = new File($imagePath);
+        $storedPath = Storage::putFile('public/products', $file);
+
+        return Storage::url($storedPath);
+    }
     public function run(): void
     {
+        Storage::deleteDirectory('public/products');
+        Storage::makeDirectory('public/products');
+        $this->command->info('Đã dọn dẹp và tạo lại thư mục /public/products trên Cloudinary.');
+
         $cpuCategory = Category::where('name', 'CPU')->first();
         $mainboardCategory = Category::where('name', 'Mainboard')->first();
         $ramCategory = Category::where('name', 'RAM')->first();
@@ -32,7 +58,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.9,
                 'sold_count' => 350,
                 'stock' => 45,
-                'image_url' => 'https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Intel+i5-13400F',
+                'main_image' => 'i5-13400f_main.jpg',
+                'other_images' => ['i5-13400f_1.jpg', 'i5-13400f_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'LGA1700',
@@ -52,7 +79,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.8,
                 'sold_count' => 420,
                 'stock' => 60,
-                'image_url' => 'https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Intel+i5-12400F',
+                'main_image' => 'i5-12400f_main.jpg',
+                'other_images' => ['i5-12400f_1.jpg', 'i5-12400f_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'LGA1700',
@@ -72,7 +100,8 @@ class ProductSeeder extends Seeder
                 'rating' => 5.0,
                 'sold_count' => 180,
                 'stock' => 25,
-                'image_url' => 'https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Intel+i7-13700K',
+                'main_image' => 'i7-13700K_main.jpg',
+                'other_images' => ['i7-13700K_1.jpg', 'i7-13700K_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'LGA1700',
@@ -92,7 +121,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.7,
                 'sold_count' => 290,
                 'stock' => 38,
-                'image_url' => 'https://via.placeholder.com/300x300/ED1C24/FFFFFF?text=AMD+Ryzen+5',
+                'main_image' => 'asus-b660m_main.jpg',
+                'other_images' => ['asus-b660m_1.jpg', 'asus-b660m_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'AM4',
@@ -116,7 +146,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.8,
                 'sold_count' => 220,
                 'stock' => 32,
-                'image_url' => 'https://via.placeholder.com/300x300/FFB81C/000000?text=ASUS+TUF+B660M',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'LGA1700',
@@ -135,7 +166,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.6,
                 'sold_count' => 175,
                 'stock' => 28,
-                'image_url' => 'https://via.placeholder.com/300x300/000000/FFFFFF?text=MSI+B550M',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'AM4',
@@ -158,7 +190,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.9,
                 'sold_count' => 580,
                 'stock' => 120,
-                'image_url' => 'https://via.placeholder.com/300x300/000000/FFFFFF?text=Kingston+Fury',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Capacity' => '16GB (2x8GB)',
@@ -176,7 +209,8 @@ class ProductSeeder extends Seeder
                 'rating' => 5.0,
                 'sold_count' => 340,
                 'stock' => 65,
-                'image_url' => 'https://via.placeholder.com/300x300/FFD700/000000?text=Corsair+RGB',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Capacity' => '32GB (2x16GB)',
@@ -199,7 +233,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.9,
                 'sold_count' => 145,
                 'stock' => 22,
-                'image_url' => 'https://via.placeholder.com/300x300/76B900/FFFFFF?text=RTX+4060+Ti',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'GPU' => 'RTX 4060 Ti',
@@ -217,7 +252,8 @@ class ProductSeeder extends Seeder
                 'rating' => 5.0,
                 'sold_count' => 98,
                 'stock' => 15,
-                'image_url' => 'https://via.placeholder.com/300x300/76B900/FFFFFF?text=RTX+4070',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'GPU' => 'RTX 4070',
@@ -239,7 +275,8 @@ class ProductSeeder extends Seeder
                 'rating' => 5.0,
                 'sold_count' => 420,
                 'stock' => 85,
-                'image_url' => 'https://via.placeholder.com/300x300/1428A0/FFFFFF?text=Samsung+980+PRO',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '60 tháng',
                 'spec' => [
                     'Capacity' => '1TB',
@@ -257,7 +294,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.9,
                 'sold_count' => 210,
                 'stock' => 42,
-                'image_url' => 'https://via.placeholder.com/300x300/000000/FFB81C?text=WD+Black',
+                'main_image' => '',
+                'other_images' => [''],
                 'warranty' => '60 tháng',
                 'spec' => [
                     'Capacity' => '2TB',
@@ -268,9 +306,39 @@ class ProductSeeder extends Seeder
             ],
         ];
 
-        // Insert all products
-        foreach (array_merge($cpuProducts, $mainboardProducts, $ramProducts, $gpuProducts, $storageProducts) as $product) {
-            Product::create($product);
+        $this->command->info('Bắt đầu seeding sản phẩm và upload ảnh...');
+        $allProducts = array_merge($cpuProducts, $mainboardProducts, $ramProducts, $gpuProducts, $storageProducts);
+
+        foreach ($allProducts as $productData) {
+
+            $mainImageName = $productData['main_image'] ?? null;
+            $otherImageNames = $productData['other_images'] ?? [];
+
+            unset($productData['main_image'], $productData['other_images']);
+
+            if ($mainImageName) {
+                $productData['main_image'] = $this->uploadImage($mainImageName);
+            } else {
+                $productData['main_image'] = 'https://via.placeholder.com/300x300/CCCCCC/FFFFFF?text=No+Image';
+            }
+
+            $otherImagePaths = [];
+            if (!empty($otherImageNames)) {
+                foreach ($otherImageNames as $imageName) {
+                    if (empty($imageName)) continue;
+
+                    $imageUrl = $this->uploadImage($imageName);
+                    if ($imageUrl) {
+                        $otherImagePaths[] = $imageUrl;
+                    }
+                }
+            }
+            $productData['other_images'] = $otherImagePaths;
+
+            Product::create($productData);
+
         }
+
+        $this->command->info('Hoàn tất seeding sản phẩm và upload ảnh!');
     }
 }

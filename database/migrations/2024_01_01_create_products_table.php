@@ -24,16 +24,10 @@ return new class extends Migration
             $table->decimal('rating', 3, 2)->default(0);
             $table->integer('sold_count')->default(0);
             $table->integer('stock')->default(0);
-            $table->text('image_url')->nullable();
+            $table->string('main_image')->nullable();
+            $table->json('other_images')->nullable();
             $table->string('warranty')->nullable();
             $table->json('spec')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('product_images', function (Blueprint $table) {
-            $table->id('image_id');
-            $table->foreignId('product_id')->constrained('products', 'product_id')->cascadeOnDelete();
-            $table->text('image_url');
             $table->timestamps();
         });
 
@@ -53,7 +47,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('product_images');
         Schema::dropIfExists('products');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('users');

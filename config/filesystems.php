@@ -30,6 +30,14 @@ return [
 
     'disks' => [
 
+        'cloudinary' => [
+            'driver' => 'cloudinary',
+            'url' => env('CLOUDINARY_URL'),
+            'upload_options' => [
+                'folder' => 'dorogear',
+            ],
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

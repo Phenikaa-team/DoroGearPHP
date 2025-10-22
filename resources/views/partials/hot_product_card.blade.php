@@ -1,7 +1,9 @@
 <div class="card product-card h-100 border-0 rounded-3 shadow-sm overflow-hidden hover-shadow-lg">
     <div class="row g-0">
         <div class="col-4 p-2 d-flex align-items-center justify-content-center">
-            <img src="{{ asset('storage/' . $product->image_url) }}" class="img-fluid rounded-start product-card-img" alt="{{ $product->name }}">
+            <img src="{{ $product->main_image }}"
+                 class="img-fluid rounded-start product-card-img"
+                 alt="{{ $product->name }}">
         </div>
         <div class="col-8">
             <div class="card-body p-2 d-flex flex-column">
@@ -22,14 +24,10 @@
 
                     @if ($product->discount_percent && $product->discount_percent > 0)
                         <span class="badge bg-danger discount-badge rounded-pill">
-                            -{{ number_format($product->discount_percent, 0) }}%
+                            -{{ number_format($product->discount_percent) }}%
                         </span>
                     @endif
                 </div>
-
-                {{-- <div class="mt-2 text-center">
-                    <button class="btn btn-sm btn-outline-primary w-100">Thêm vào giỏ</button>
-                </div> --}}
             </div>
         </div>
     </div>
