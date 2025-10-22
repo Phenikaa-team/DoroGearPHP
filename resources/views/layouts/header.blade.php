@@ -5,9 +5,7 @@
         <div class="row align-items-center">
             <div class="col-md-2">
                 <a href="/" class="navbar-brand d-flex align-items-center">
-                    <div class="logo-icon bg-white rounded p-2">
-                        <i class="fas fa-laptop fa-3x text-primary"></i>
-                    </div>
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 80px; height: auto;">
                 </a>
             </div>
             <div class="col-md-5">

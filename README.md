@@ -24,6 +24,10 @@
   php artisan serve
 ```
 
+```bash
+ php artisan migrate:fresh --seed
+```
+
 
 
 
