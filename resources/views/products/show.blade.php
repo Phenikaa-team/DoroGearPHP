@@ -111,13 +111,25 @@
                     <!-- Actions -->
                     <div class="product-actions mb-4">
                         <div class="d-flex gap-2">
-                            <button class="btn btn-danger btn-lg flex-fill" @if($product->stock == 0) disabled @endif>
-                                <i class="fas fa-shopping-cart me-2"></i>
-                                Mua ngay
-                            </button>
-                            <button class="btn btn-outline-primary btn-lg" @if($product->stock == 0) disabled @endif>
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
+
+                            <form action="{{ route('cart.buyNow') }}" method="POST" class="flex-fill">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-danger btn-lg w-100" @if($product->stock == 0) disabled @endif>
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    Mua ngay
+                                </button>
+                            </form>
+                            <form action="{{ route('cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-outline-primary btn-lg" @if($product->stock == 0) disabled @endif>
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </form>
+
                             <button class="btn btn-outline-secondary btn-lg">
                                 <i class="fas fa-heart"></i>
                             </button>

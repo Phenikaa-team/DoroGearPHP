@@ -49,9 +49,14 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button class="btn btn-outline-primary btn-sm">
-                    <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
-                </button>
+                <form action="{{ route('cart.add') }}" method="POST" onsubmit="this.querySelector('button').disabled = true; this.querySelector('button').innerHTML = 'Đang thêm...';">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-outline-primary btn-sm w-100" @if($product->stock == 0) disabled @endif>
+                        <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
+                    </button>
+                </form>
             </div>
 
             @if($product->stock > 0)

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\ProductImage;
 use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -166,8 +165,8 @@ class ProductSeeder extends Seeder
                 'rating' => 4.6,
                 'sold_count' => 175,
                 'stock' => 28,
-                'main_image' => '',
-                'other_images' => [''],
+                'main_image' => 'msi-b550m-pro_main.jpg',
+                'other_images' => ['msi-b550m-pro_1.jpg', 'msi-b550m-pro_2.jpg'],
                 'warranty' => '36 tháng',
                 'spec' => [
                     'Socket' => 'AM4',

@@ -36,9 +36,16 @@
                         <i class="fas fa-question-circle fa-2x mb-2"></i>
                         <small>Hỗ trợ</small>
                     </a>
-                    <a href="#" class="header-link text-white text-decoration-none me-4 d-flex flex-column align-items-center">
+                    <a href="{{ route('cart.list') }}" class="header-link text-white text-decoration-none me-4 d-flex flex-column align-items-center position-relative">
                         <i class="fas fa-shopping-cart fa-2x mb-2"></i>
                         <small>Giỏ hàng</small>
+
+                        @if(Cart::getTotalQuantity() > 0)
+                            <span class="badge bg-danger rounded-pill position-absolute"
+                                  style="top: -5px; right: 0px; font-size: 0.6rem;">
+                            {{ Cart::getTotalQuantity() }}
+                        </span>
+                        @endif
                     </a>
                     @guest
                         <a href="{{ route('login') }}" class="btn btn-outline-light d-flex align-items-center">
@@ -70,7 +77,7 @@
                                     <li><hr class="dropdown-divider"></li>
                                 @endif
                                 <li><a class="dropdown-item" href="{{ route('profile.show') }}">Tài khoản của tôi</a></li>
-                                <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.orders') }}">Đơn hàng</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">

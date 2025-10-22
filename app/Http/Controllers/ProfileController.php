@@ -64,4 +64,13 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')->with('status', 'Đổi mật khẩu thành công!');
     }
+
+    public function orders(Request $request)
+    {
+        $user = $request->user();
+
+        $orders = $user->orders()->with('items')->latest()->paginate(10);
+
+        return view('profile.orders', compact('user', 'orders'));
+    }
 }

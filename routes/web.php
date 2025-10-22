@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,12 +17,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -46,4 +42,25 @@ Route::middleware('auth')->group(function () {
 
     Route::post('my-account/update-password', [ProfileController::class, 'updatePassword'])
         ->name('profile.updatePassword');
+
+    Route::get('checkout', [CheckoutController::class, 'create'])
+        ->name('checkout.create');
+
+    Route::post('checkout', [CheckoutController::class, 'store'])
+        ->name('checkout.store');
+
+    Route::get('checkout/success/{order}', [CheckoutController::class, 'success'])
+        ->name('checkout.success');
+
+    Route::get('my-orders', [ProfileController::class, 'orders'])->name('profile.orders');
 });
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::get('/cart', [CartController::class, 'list'])->name('cart.list');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/buy-now', [CartController::class, 'buyNow'])->name('cart.buyNow');
