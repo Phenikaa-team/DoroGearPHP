@@ -1,4 +1,6 @@
-![logo.png](public/images/logo.png)
+<p align="center">
+  <img src="public/images/logo.png" alt="Logo" width="200">
+</p>
 
 <h1 align="center">Website Bán Linh Kiện Máy Tính</h1>
 
