@@ -34,7 +34,27 @@
 </div>
 
 ---
+                                    TRƯỜNG ĐẠI HỌC PHENIKAA KHOA CÔNG NGHỆ THÔNG TIN 
 
+                                        
+                                        BÁO CÁO THỰC NGHIỆM MÔN WED NÂNG CAO
+ 
+                                      ĐỀ TÀI: XÂY DỰNG PHẦN MỀM BÁN HÀNG ĐIỆN TỬ 
+
+
+                                        Giảng viên hướng dẫn: NGUYỄN THỊ THÙY LIÊN 
+     
+
+
+
+
+
+
+
+
+
+                                                            
+                                                                               
 ## Thông tin nhóm
 
 - Trần Bá Minh Đức - 23010210
