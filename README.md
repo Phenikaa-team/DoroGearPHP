@@ -185,11 +185,11 @@ Truy cập website tại: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
 
 <div align="center">
 
-![Database Schema](public/images/uml.svg)
+![Database Schema](public/images/uml.png)
 
 *Sơ đồ quan hệ cơ sở dữ liệu đầy đủ của hệ thống*
 
-[![View Full Size](https://img.shields.io/badge/View-Full_Size-2196F3?style=flat-square&logo=database)](public/images/uml.svg)
+[![View Full Size](https://img.shields.io/badge/View-Full_Size-2196F3?style=flat-square&logo=database)](public/images/uml.png)
 
 </div>
 
