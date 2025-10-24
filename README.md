@@ -34,10 +34,10 @@
 </div>
 
 ---
-                        TRƯỜNG ĐẠI HỌC PHENIKAA KHOA CÔNG NGHỆ THÔNG TIN   
-                                BÁO CÁO THỰC HÀNH MÔN WED NÂNG CAO
-                            ĐỀ TÀI: XÂY DỰNG PHẦN MỀM BÁN HÀNG MÁY TÍNH
-                            Giảng viên hướng dẫn: NGUYỄN THỊ THÙY LIÊN 
+                TRƯỜNG ĐẠI HỌC PHENIKAA KHOA CÔNG NGHỆ THÔNG TIN   
+                        BÁO CÁO THỰC HÀNH MÔN WED NÂNG CAO
+                     ĐỀ TÀI: XÂY DỰNG PHẦN MỀM BÁN HÀNG MÁY TÍNH
+                     Giảng viên hướng dẫn: NGUYỄN THỊ THÙY LIÊN 
      
 
 
