@@ -12,11 +12,18 @@ permissions:
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup pandoc and xelatex
+        run: |
+          sudo apt-get update
+          # Install pandoc and a minimal xelatex engine
+          sudo apt-get install -y pandoc texlive-xetex curl
 
       - name: Prepare README and download images
         run: |
@@ -41,16 +48,15 @@ jobs:
             fi
           done
 
-      - name: Generate PDF using dockerized pandoc+latex
+      - name: Generate PDF using pandoc (A4)
         run: |
-          docker run --rm -v "${{ github.workspace }}:/data" pandoc/latex:latest \
-            pandoc /data/README.md \
-              -o /data/README.pdf \
-              --from markdown+hard_line_breaks+yaml_metadata_block \
-              --pdf-engine=xelatex \
-              -V geometry:margin=1in \
-              -V papersize:a4 \
-              --metadata title="DoroGearPHP README"
+          pandoc README.md \
+            -o README.pdf \
+            --from markdown+hard_line_breaks+yaml_metadata_block \
+            --pdf-engine=xelatex \
+            -V geometry:margin=1in \
+            -V papersize:a4 \
+            --metadata title="DoroGearPHP README"
 
       - name: Show generated file info
         run: |
